@@ -35,10 +35,6 @@ public class FrontController extends HttpServlet {
 				
 		String command = uri.substring(conPath.length()+1);
 		
-		System.out.println(uri);
-		System.out.println(conPath);
-		System.out.println(command);
-		
 		String[] commands = command.split("/");
 		
 		if(commands[0].equals("board")) {

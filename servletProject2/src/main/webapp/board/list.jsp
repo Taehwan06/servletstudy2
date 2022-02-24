@@ -30,7 +30,7 @@
 		%>		
 			<tr>
 				<td><%=vo.getBidx() %></td>
-				<td><%=vo.getTitle() %></td>
+				<td><a href="view.do?bidx=<%=vo.getBidx() %>"><%=vo.getTitle() %></a></td>
 				<td><%=vo.getWriter() %></td>
 				<td><%=vo.getWdate() %></td>
 				<td><%=vo.getHit() %></td>
@@ -39,5 +39,8 @@
 		%>
 		</tbody>
 	</table>
+	<br>
+	<input type="button" value="등록" onclick="location.href='insert.do'">
+	<input type="button" value="뒤로" onclick="location.href='index.do'">
 </body>
 </html>

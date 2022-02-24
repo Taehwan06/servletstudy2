@@ -28,7 +28,7 @@
 		%>		
 			<tr>
 				<td><%=vo.getMidx() %></td>
-				<td><%=vo.getName() %></td>
+				<td><a href=""><%=vo.getName() %></a></td>
 				<td><%=vo.getId() %></td>
 			</tr>
 		<%	}
