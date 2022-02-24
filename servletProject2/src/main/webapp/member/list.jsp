@@ -28,12 +28,15 @@
 		%>		
 			<tr>
 				<td><%=vo.getMidx() %></td>
-				<td><a href=""><%=vo.getName() %></a></td>
+				<td><a href="view.do?midx=<%=vo.getMidx() %>"><%=vo.getName() %></a></td>
 				<td><%=vo.getId() %></td>
 			</tr>
 		<%	}
 		%>
 		</tbody>
 	</table>
+	<br>
+	<input type="button" value="등록" onclick="location.href='insert.do'">
+	<input type="button" value="뒤로" onclick="location.href='index.do'">
 </body>
 </html>

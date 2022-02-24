@@ -34,6 +34,20 @@ public class MemberController extends HttpServlet {
 		
 		if(commands[1].equals("list.do")) {
 			list(request, response);
+		}else if(commands[1].equals("view.do")) {
+			view(request, response);
+		}else if(commands[1].equals("modify.do")) {
+			if(request.getMethod().equals("GET")) {
+				modify(request, response);
+			}else if(request.getMethod().equals("POST")) {
+				modifyOk(request, response);
+			}
+		}else if(commands[1].equals("insert.do")) {
+			if(request.getMethod().equals("GET")) {
+				insert(request, response);
+			}else if(request.getMethod().equals("POST")) {
+				insertOk(request, response);
+			}
 		}
 		
 	}
@@ -56,5 +70,52 @@ public class MemberController extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/member/list.jsp");
 		rd.forward(request, response);
 	}
+	
+	private void view(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String midx =  request.getParameter("midx");
+		
+		MemberDAO memberDAO = new MemberDAO();
+		MemberVO vo = memberDAO.selectOne(midx);
+		
+		request.setAttribute("vo", vo);
+		RequestDispatcher rd = request.getRequestDispatcher("/member/view.jsp");
+		rd.forward(request, response);
+	}
+	
+	private void modify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String midx =  request.getParameter("midx");
+		
+		MemberDAO memberDAO = new MemberDAO();
+		MemberVO vo = memberDAO.selectOne(midx);
+		
+		request.setAttribute("vo", vo);
+		RequestDispatcher rd = request.getRequestDispatcher("/member/modify.jsp");
+		rd.forward(request, response);
+	}
+	
+	private void modifyOk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		MemberVO vo = new MemberVO();
+		
+		vo.setMidx(Integer.parseInt(request.getParameter("midx")));
+		vo.setEmail(request.getParameter("email"));
+		vo.setPhone(request.getParameter("phone"));
+		
+		MemberDAO memberDAO = new MemberDAO();
+		memberDAO.update(vo);
+		
+		response.sendRedirect(request.getContextPath()+"/member/view.do?midx="+request.getParameter("midx"));		
+	}
+	
+	private void insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/member/insert.jsp");
+		rd.forward(request, response);
+	}
+	
 
 }
